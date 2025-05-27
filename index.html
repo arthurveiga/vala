@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista Vala</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="info" id="info">
+    <h1 id="titulo">LISTA REVOADA DOS GURI (30.05)</h1>
+    <p id="info1">✨ Elas free (até as 23h)</p>
+    <p id="info2">🔥 Eles R$20,00 (até as 23h)</p>
+    <p id="info3"><strong>com nome na lista</strong></p>
+    <p id="info4">SEM NOME NA LISTA OU FORA DO HORÁRIO É COBRADO VALOR DA PORTARIA</p>
+  </div>
+
+  <div class="formulario">
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="text" id="sobrenome" placeholder="Sobrenome">
+    <button onclick="adicionarPessoa()">Adicionar à lista</button>
+    <button class="excluir animada" onclick="mostrarPromptADM('limpar')">
+      🗑️ Limpar lista (ADM)
+    </button>
+    <button class="editar animada" onclick="mostrarPromptADM('editar')">
+      ✏️ Editar informações (ADM)
+    </button>
+  </div>
+
+  <div id="promptADM" style="display:none; text-align:center; margin: 20px auto;">
+    <input type="password" id="senhaADM" placeholder="Digite a senha de ADM">
+    <button onclick="autenticarADM()">🔐 Confirmar</button>
+  </div>
+
+  <div id="confirmacaoLimpeza" class="confirmacao-popup" style="display:none;">
+    <p>Tem certeza que deseja limpar a lista?</p>
+    <button onclick="confirmarLimpezaLista(true)">✅ Sim</button>
+    <button onclick="confirmarLimpezaLista(false)">❌ Não</button>
+  </div>
+
+  <ol id="lista"></ol>
+
+  <div id="editarInfos" style="display:none; text-align:center; margin-top: 20px;">
+    <h2>Editar Informações da Festa (ADM)</h2>
+    <input type="text" id="novoTitulo" placeholder="Novo título"><br>
+    <input type="text" id="novaInfo1" placeholder="Nova info 1"><br>
+    <input type="text" id="novaInfo2" placeholder="Nova info 2"><br>
+    <input type="text" id="novaInfo3" placeholder="Nova info 3"><br>
+    <input type="text" id="novaInfo4" placeholder="Nova info 4"><br>
+    <button onclick="salvarInformacoes()">💾 Salvar Informações</button>
+    <button onclick="fecharEdicao()">❌ Fechar Edição</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
