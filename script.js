@@ -1,7 +1,31 @@
 let lista = JSON.parse(localStorage.getItem("listaNomes")) || [];
 let acaoADM = "";
+let listaTrancada = JSON.parse(localStorage.getItem("listaTrancada")) || false;
+
+const btnAdicionar = document.getElementById("btnAdicionar");
+const btnTrancar = document.getElementById("btnTrancar");
+const statusLista = document.getElementById("statusLista");
+
+function atualizarStatus() {
+  if (listaTrancada) {
+    statusLista.textContent = "Lista: FECHADA 🔒";
+    btnTrancar.textContent = "🔓 Destrancar Lista";
+    btnAdicionar.disabled = true;
+    btnAdicionar.style.opacity = 0.5;
+  } else {
+    statusLista.textContent = "Lista: ABERTA 🔓";
+    btnTrancar.textContent = "🔒 Trancar Lista";
+    btnAdicionar.disabled = false;
+    btnAdicionar.style.opacity = 1;
+  }
+}
 
 function adicionarPessoa() {
+  if (listaTrancada) {
+    alert("A lista está trancada. Não é possível adicionar novas pessoas.");
+    return;
+  }
+  
   const nome = document.getElementById("nome").value.trim();
   const sobrenome = document.getElementById("sobrenome").value.trim();
 
@@ -20,7 +44,7 @@ function adicionarPessoa() {
 function atualizarLista() {
   const ol = document.getElementById("lista");
   ol.innerHTML = "";
-  lista.forEach(pessoa => {
+  lista.forEach((pessoa) => {
     const li = document.createElement("li");
     li.textContent = pessoa;
     ol.appendChild(li);
@@ -56,10 +80,15 @@ function autenticarADM() {
   document.getElementById("senhaADM").value = "";
 
   if (senha === "123") {
-    if (acaoADM === 'limpar') limparLista();
-    if (acaoADM === 'editar') {
+    if (acaoADM === "limpar") limparLista();
+    else if (acaoADM === "editar") {
       document.getElementById("editarInfos").style.display = "block";
       window.scrollTo(0, document.body.scrollHeight);
+    }
+    else if (acaoADM === "trancar") {
+      listaTrancada = !listaTrancada;
+      localStorage.setItem("listaTrancada", JSON.stringify(listaTrancada));
+      atualizarStatus();
     }
   } else {
     alert("Senha incorreta. Ação não autorizada.");
@@ -86,5 +115,6 @@ function fecharEdicao() {
   document.getElementById("editarInfos").style.display = "none";
 }
 
-// Atualiza a lista ao carregar a página
+// Inicialização ao carregar a página
 atualizarLista();
+atualizarStatus();
