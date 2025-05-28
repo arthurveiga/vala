@@ -8,13 +8,13 @@ const statusLista = document.getElementById("statusLista");
 
 function atualizarStatus() {
   if (listaTrancada) {
-    statusLista.textContent = "Lista: FECHADA 🔒";
+    statusLista.textContent = "Status da Lista: FECHADA 🔒";
     btnTrancar.textContent = "🔓 Destrancar Lista";
     btnAdicionar.disabled = true;
     btnAdicionar.style.opacity = 0.5;
   } else {
-    statusLista.textContent = "Lista: ABERTA 🔓";
-    btnTrancar.textContent = "🔒 Trancar Lista";
+    statusLista.textContent = "Status da Lista: ABERTA 🔓";
+    btnTrancar.textContent = "🔒 Trancar Lista (ADM)";
     btnAdicionar.disabled = false;
     btnAdicionar.style.opacity = 1;
   }
