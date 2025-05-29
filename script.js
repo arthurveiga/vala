@@ -3,29 +3,29 @@ let acaoADM = "";
 let listaTrancada = JSON.parse(localStorage.getItem("listaTrancada")) || false;
 
 const btnAdicionar = document.getElementById("btnAdicionar");
-const btnTrancar = document.getElementById("btnTrancar");
 const statusLista = document.getElementById("statusLista");
 
 function atualizarStatus() {
+  const statusEl = document.getElementById("statusLista");
+
   if (listaTrancada) {
-    statusLista.textContent = "Status da Lista: FECHADA 🔒";
-    btnTrancar.textContent = "🔓 Destrancar Lista";
+    statusEl.innerHTML = 'Status da Lista:&nbsp;<span class="vermelho">FECHADA 🔒</span>';
     btnAdicionar.disabled = true;
     btnAdicionar.style.opacity = 0.5;
   } else {
-    statusLista.textContent = "Status da Lista: ABERTA 🔓";
-    btnTrancar.textContent = "🔒 Trancar Lista (ADM)";
+    statusEl.innerHTML = 'Status da Lista:&nbsp;<span class="verde">ABERTA 🔓</span>';
     btnAdicionar.disabled = false;
     btnAdicionar.style.opacity = 1;
   }
 }
+
 
 function adicionarPessoa() {
   if (listaTrancada) {
     alert("A lista está trancada. Não é possível adicionar novas pessoas.");
     return;
   }
-  
+
   const nome = document.getElementById("nome").value.trim();
   const sobrenome = document.getElementById("sobrenome").value.trim();
 
@@ -80,39 +80,42 @@ function autenticarADM() {
   document.getElementById("senhaADM").value = "";
 
   if (senha === "123") {
-    if (acaoADM === "limpar") limparLista();
-    else if (acaoADM === "editar") {
-      document.getElementById("editarInfos").style.display = "block";
-      window.scrollTo(0, document.body.scrollHeight);
-    }
-    else if (acaoADM === "trancar") {
-      listaTrancada = !listaTrancada;
-      localStorage.setItem("listaTrancada", JSON.stringify(listaTrancada));
-      atualizarStatus();
+    switch (acaoADM) {
+      case "painel":
+        document.getElementById("painelADM").style.display = "block";
+        break;
+      case "limpar":
+        limparLista();
+        break;
+      case "editar":
+        mostrarEdicao();
+        break;
+      case "trancar":
+        alternarTrancarLista();
+        break;
     }
   } else {
     alert("Senha incorreta. Ação não autorizada.");
   }
 }
 
-function salvarInformacoes() {
-  const novoTitulo = document.getElementById("novoTitulo").value;
-  const novaInfo1 = document.getElementById("novaInfo1").value;
-  const novaInfo2 = document.getElementById("novaInfo2").value;
-  const novaInfo3 = document.getElementById("novaInfo3").value;
-  const novaInfo4 = document.getElementById("novaInfo4").value;
-
-  if (novoTitulo) document.getElementById("titulo").textContent = novoTitulo;
-  if (novaInfo1) document.getElementById("info1").textContent = novaInfo1;
-  if (novaInfo2) document.getElementById("info2").textContent = novaInfo2;
-  if (novaInfo3) document.getElementById("info3").innerHTML = `<strong>${novaInfo3}</strong>`;
-  if (novaInfo4) document.getElementById("info4").textContent = novaInfo4;
-
-  alert("Informações atualizadas com sucesso!");
+function mostrarEdicao() {
+  document.getElementById("editarInfos").style.display = "block";
+  window.scrollTo(0, document.body.scrollHeight);
 }
 
 function fecharEdicao() {
   document.getElementById("editarInfos").style.display = "none";
+}
+
+function fecharPainelADM() {
+  document.getElementById("painelADM").style.display = "none";
+}
+
+function alternarTrancarLista() {
+  listaTrancada = !listaTrancada;
+  localStorage.setItem("listaTrancada", JSON.stringify(listaTrancada));
+  atualizarStatus();
 }
 
 // Inicialização ao carregar a página

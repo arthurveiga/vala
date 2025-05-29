@@ -25,7 +25,7 @@ h1, h2 {
 }
 
 button {
-  padding: 6px;
+  padding: 10px;
   background-color: #ff4081;
   color: white;
   border: none;
@@ -82,7 +82,7 @@ button.trancar.animada:hover {
 
 .linha-botoes-principais button {
   flex: 0.25;
-  min-width: 160px;
+  min-width: 250px;
 }
 
 .linha-trancar-status {
@@ -95,7 +95,7 @@ button.trancar.animada:hover {
 
 .linha-trancar-status button,
 .linha-trancar-status #statusLista {
-  width: 42%;
+  width: 86%;
   box-sizing: border-box;
   text-align: center;
   padding: 10px 0;
@@ -165,4 +165,32 @@ li {
 
 #info4 {
   font-size: 14.7099px;
+}
+
+#btnAcessoADM {
+  background-color: #6a1b9a;
+}
+
+#btnAcessoADM:hover {
+  background-color: #8e24aa;
+  max-width: 700px;
+}
+
+.painelADM {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.linha-trancar-status {
+  color: red;
+}
+
+.vermelho {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+}
+
+.verde {
+  color: rgb(0, 255, 0);
+  font-weight: bold;
 }

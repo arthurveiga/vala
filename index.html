@@ -21,13 +21,21 @@
 
     <div class="linha-botoes-principais">
       <button onclick="adicionarPessoa()" id="btnAdicionar">Adicionar à lista</button>
-      <button class="excluir animada" onclick="mostrarPromptADM('limpar')">🗑️ Limpar lista (ADM)</button>
-      <button class="editar animada" onclick="mostrarPromptADM('editar')">✏️ Editar informações (ADM)</button>
+      <button onclick="mostrarPromptADM('painel')" id="btnAcessoADM">🔑 Acesso ADM</button>
     </div>
 
     <div class="linha-trancar-status">
-      <button id="btnTrancar" onclick="mostrarPromptADM('trancar')">🔒 Trancar Lista</button>
-      <div id="statusLista">Lista destrancada</div>
+      <div id="statusLista">Status da Lista</div>
+    </div>
+  </div>
+
+  <!-- Painel ADM oculto -->
+  <div class="painelADM" id="painelADM" style="display:none;">
+    <div class="linha-botoes-principais">
+      <button class="excluir animada" onclick="limparLista()">🗑️ Limpar lista</button>
+      <button class="editar animada" onclick="mostrarEdicao()">✏️ Editar informações</button>
+      <button class="trancar animada" onclick="alternarTrancarLista()">🔒 Trancar/Destrancar Lista</button>
+      <button onclick="fecharPainelADM()">❌ Fechar painel ADM</button>
     </div>
   </div>
 
